@@ -8,3 +8,5 @@ lib/
 *.t3x
 *.bcfnt
 *~
+
+*.lst
