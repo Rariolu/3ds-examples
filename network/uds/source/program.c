@@ -28,7 +28,7 @@ int main()
 	}
 	else
 	{
-		uds_testt();
+		uds_test();
 		udsExit();
 	}
 
