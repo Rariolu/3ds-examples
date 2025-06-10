@@ -1,3 +1,6 @@
+#ifndef UDS_UTIL_H
+#define UDS_UTIL_H
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -8,7 +11,10 @@
 
 #include <3ds.h>
 
-void print_constatus()
+void print_constatuss();
+void uds_testt();
+
+void print_constatuss()
 {
 	Result ret=0;
 	u32 pos;
@@ -33,7 +39,7 @@ void print_constatus()
 	}
 }
 
-void uds_test()
+void uds_testt()
 {
 	Result ret=0;
 	u32 con_type=0;
@@ -245,7 +251,7 @@ void uds_test()
 	if(udsWaitConnectionStatusEvent(false, false))
 	{
 		printf("Constatus event signaled.\n");
-		print_constatus();
+		print_constatuss();
 	}
 
 	printf("Press A to stop data transfer.\n");
@@ -363,7 +369,7 @@ void uds_test()
 		if(udsWaitConnectionStatusEvent(false, false))
 		{
 			printf("Constatus event signaled.\n");
-			print_constatus();
+			print_constatuss();
 		}
 	}
 
@@ -381,43 +387,4 @@ void uds_test()
 	udsUnbind(&bindctx);
 }
 
-int main()
-{
-	Result ret=0;
-
-	gfxInitDefault();
-	consoleInit(GFX_TOP, NULL);
-
-	printf("libctru UDS local-WLAN demo.\n");
-
-	ret = udsInit(0x3000, NULL);//The sharedmem size only needs to be slightly larger than the total recv_buffer_size for all binds, with page-alignment.
-	if(R_FAILED(ret))
-	{
-		printf("udsInit failed: 0x%08x.\n", (unsigned int)ret);
-	}
-	else
-	{
-		uds_test();
-		udsExit();
-	}
-
-	printf("Press START to exit.\n");
-
-	// Main loop
-	while (aptMainLoop())
-	{
-		gspWaitForVBlank();
-		hidScanInput();
-
-		u32 kDown = hidKeysDown();
-		if (kDown & KEY_START)
-			break; // break in order to return to hbmenu
-
-		// Flush and swap framebuffers
-		gfxFlushBuffers();
-		gfxSwapBuffers();
-	}
-
-	gfxExit();
-	return 0;
-}
+#endif
