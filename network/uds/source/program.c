@@ -10,7 +10,7 @@
 #include <unistd.h>
 
 #include <3ds.h>
-#include "./udsutil.c"
+#include "udsutil.h"
 
 int main()
 {
