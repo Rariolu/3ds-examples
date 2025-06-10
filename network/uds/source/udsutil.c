@@ -1,5 +1,23 @@
 #include "udsutil.h"
 
+void closeOnInputTrigger(u32 button)
+{
+		// Main loop
+	while (aptMainLoop())
+	{
+		gspWaitForVBlank();
+		hidScanInput();
+
+		u32 kDown = hidKeysDown();
+		if (kDown & button)
+			break; // break in order to return to hbmenu
+
+		// Flush and swap framebuffers
+		gfxFlushBuffers();
+		gfxSwapBuffers();
+	}
+}
+
 void print_constatus()
 {
 	Result ret=0;

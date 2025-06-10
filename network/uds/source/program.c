@@ -34,20 +34,7 @@ int main()
 
 	printf("Press START to exit.\n");
 
-	// Main loop
-	while (aptMainLoop())
-	{
-		gspWaitForVBlank();
-		hidScanInput();
-
-		u32 kDown = hidKeysDown();
-		if (kDown & KEY_START)
-			break; // break in order to return to hbmenu
-
-		// Flush and swap framebuffers
-		gfxFlushBuffers();
-		gfxSwapBuffers();
-	}
+	closeOnInputTrigger(KEY_START);
 
 	gfxExit();
 	return 0;

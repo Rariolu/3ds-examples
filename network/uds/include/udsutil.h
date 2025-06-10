@@ -11,6 +11,7 @@
 
 #include <3ds.h>
 
+void closeOnInputTrigger(u32 button);
 void print_constatus();
 void uds_test();
 
